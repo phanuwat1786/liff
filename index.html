@@ -101,28 +101,30 @@
     }
 
     function submitForm() {
-            const form = document.getElementById('bookingForm');
-            const formData = new FormData(form);
+    const form = document.getElementById('bookingForm');
+    const formData = new FormData(form);
 
-            fetch('https://docs.google.com/spreadsheets/d/1ZJAeuNaOvL6SqiEaksSf800RjNoNPWgMUsLGLxBH30U/edit?resourcekey#gid=524864573', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                console.log(data);
-                // Optionally, you can redirect the user or perform other actions after successful submission
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
+    fetch('https://script.google.com/macros/s/AKfycbykOlvHskIBjHTg3zHCmDNDxdMwCC3I5vr3p1xr8W9I87YX-zZLTL68xRdRoVi4mUlH/exec', {
+        method: 'POST',
+        body: JSON.stringify(Object.fromEntries(formData.entries())),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-
+        return response.text();
+    })
+    .then(data => {
+        console.log(data);
+        // Optionally, you can redirect the user or perform other actions after successful submission
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}
     async function main() {
       alert("LINE Developers x Skooldio")
       await liff.init({ liffId: "https://liff.line.me/2001640177-Znly18NJ" })
