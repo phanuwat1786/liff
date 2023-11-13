@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
-  <title>My LIFF app</title>
+  <title>ระบบจองคิวออนไลน์ คลินิคทันตกรรม โรงพยาบาลเขาชัยสน</title>
+  
   <link rel="stylesheet" href="css/style.css" media="all">
 </head>
 <body>
-  <p id="os"><b>OS:</b> </p>
+  <!-- <p id="os"><b>OS:</b> </p>
   <p id="language"><b>Language:</b> </p>
   <p id="version"><b>Version:</b> </p>
   <p id="isInClient"><b>isInClient:</b> </p>
@@ -34,7 +35,37 @@
   <button onclick="openWindow()">Open Window</button>
   <button id="btnScanCode" onclick="scanCode()">Scan Code</button>
   <button id="btnLogOut" onclick="logOut()">Log Out</button>
-  <button id="btnClose" onclick="closed()">Close</button>
+  <button id="btnClose" onclick="closed()">Close</button> -->
+  <h1>ระบบจองคิวออนไลน์</h1>
+  <h2>Booking Form</h2>
+
+  <form action="/submit_booking" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" required>
+
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Time:</label>
+      <input type="time" id="time" name="time" required>
+
+      <label for="service">Select a service:</label>
+      <select id="service" name="service" required>
+          <option value="service1">Service 1</option>
+          <option value="service2">Service 2</option>
+          <!-- Add more options as needed -->
+      </select>
+
+      <button type="submit">Submit Booking</button>
+  </form>
+
+
 
   <!-- <script src="js/vconsole.min.js"></script> -->
   <!-- <script>
@@ -42,7 +73,7 @@
     console.log("Hello World!")
   </script> -->
 
-  <!-- <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script> -->
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     function createUniversalLink() {
     }
@@ -75,11 +106,12 @@
     }
 
     function getEnvironment() {
+
     }
 
     async function main() {
       alert("LINE Developers x Skooldio")
-      await liff.init({ liffId: "YOUR-LIFF-ID" })
+      await liff.init({ liffId: "https://liff.line.me/2001640177-Znly18NJ" })
       // getEnvironment()
       // getUserProfile()
       // getContext()
