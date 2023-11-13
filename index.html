@@ -37,32 +37,23 @@
   <button id="btnLogOut" onclick="logOut()">Log Out</button>
   <button id="btnClose" onclick="closed()">Close</button> -->
   <h1>ระบบจองคิวออนไลน์</h1>
-  <h2>Booking Form</h2>
+  <h2>คลินิคทันตกรรม</h2>
+  <h2>รพ.เขาชัยสน</h2>
 
-  <form action="/submit_booking" method="post">
-      <label for="name">Name:</label>
+  <form id = "bookingForm"  action="/submit_booking" method="post">
+      <label for="name">ชื่อ:</label>
       <input type="text" id="name" name="name" required>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+      <label for="email">นามสกุล:</label>
+      <input type="text" id="lastname" name="lastname" required>
 
-      <label for="phone">Phone:</label>
-      <input type="tel" id="phone" name="phone" required>
+      <label for="phone">เลขประจำตัวประชาชน:</label>
+      <input type="text" id="cid" name="cid" required>
 
       <label for="date">Date:</label>
       <input type="date" id="date" name="date" required>
 
-      <label for="time">Time:</label>
-      <input type="time" id="time" name="time" required>
-
-      <label for="service">Select a service:</label>
-      <select id="service" name="service" required>
-          <option value="service1">Service 1</option>
-          <option value="service2">Service 2</option>
-          <!-- Add more options as needed -->
-      </select>
-
-      <button type="submit">Submit Booking</button>
+      <button type="submit"  onclick="submitForm()" >ยืนยันการจอง</button>
   </form>
 
 
@@ -108,6 +99,29 @@
     function getEnvironment() {
 
     }
+
+    function submitForm() {
+            const form = document.getElementById('bookingForm');
+            const formData = new FormData(form);
+
+            fetch('https://docs.google.com/spreadsheets/d/1ZJAeuNaOvL6SqiEaksSf800RjNoNPWgMUsLGLxBH30U/edit?resourcekey#gid=524864573', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log(data);
+                // Optionally, you can redirect the user or perform other actions after successful submission
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+        }
 
     async function main() {
       alert("LINE Developers x Skooldio")
